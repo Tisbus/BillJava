@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Bill</string>
+    <string name="enter_name">Введите имена:</string>
+    <string name="add_guest">Добавить гостя</string>
+    <string name="button_delete">Х</string>
+    <string name="add_new_name">Введите новое имя</string>
+    <string name="button_next">Далее</string>
+    <string name="add_image">add_image</string>
+    <string name="name_product">Введите имя товара</string>
+    <string name="enter_price">Введите цену товара</string>
+    <string name="add_bill">Добавить</string>
+    <string name="name">Имя</string>
+    <string name="product_name">Товар</string>
+    <string name="price">Цена</string>
+    <string name="total_name">Имя</string>
+    <string name="total_sum">Общая сумма</string>
+    <string name="check_tip">Чаевые ДА / НЕТ</string>
+    <string name="tip_qty">Размер чаевых в %</string>
+    <string name="tip_add">Подтвердить</string>
+    <string name="sum_tip">Общая сумма с чаевыми:</string>
+    <string name="sum_without">Сумма чаевых:</string>
+    <string name="save">Сохранить</string>
+    <string name="date_list_bill">Дата</string>
+    <string name="name_list_bill">Название</string>
+    <string name="sum_list_bill">Сумма</string>
+    <string name="name_bill">Введите название чека</string>
+    <string name="total_guest">Сумма по каждому гостю</string>
+</resources>
