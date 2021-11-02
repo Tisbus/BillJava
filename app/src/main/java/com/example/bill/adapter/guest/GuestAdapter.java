@@ -9,22 +9,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bill.R;
+import com.example.bill.base.guest.Guest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHolder> {
 
-    private ArrayList<String> guests;
+    private List<Guest> guests;
 
     public GuestAdapter() {
         this.guests = new ArrayList<>();
     }
 
-    public ArrayList<String> getGuests() {
+    public List<Guest> getGuests() {
         return guests;
     }
 
-    public void setGuests(ArrayList<String> guests) {
+    public void setGuests(List<Guest> guests) {
         this.guests = guests;
         notifyDataSetChanged();
     }
@@ -48,7 +50,8 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
 
     @Override
     public void onBindViewHolder(@NonNull GuestViewHolder holder, int position) {
-        holder.textViewGuest.setText(guests.get(position));
+        Guest guest = guests.get(position);
+        holder.textViewGuest.setText(guest.getName());
     }
 
     @Override

@@ -26,16 +26,11 @@ public class MainActivity extends AppCompatActivity {
     private BillAdapter adapter;
     private RecyclerView recyclerView;
     private BillViewModel viewModel;
-    private ArrayList<String> guests;
     private FloatingActionButton floatAddTotal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        guests = getIntent().getStringArrayListExtra("guests");
-/*        for (int i = 0; i < guests.size(); i++) {
-            Log.i("res", "onCreate: " + guests.get(i));
-        }*/
         viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(BillViewModel.class);
 /*        viewModel.deleteAll();*/
         recyclerView = findViewById(R.id.recyclerViewBill);
@@ -48,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickNewAddBill(View view) {
         Intent intentGet = new Intent(this, AddNewBillActivity.class);
-        intentGet.putStringArrayListExtra("guests", guests);
         startActivity(intentGet);
     }
 
