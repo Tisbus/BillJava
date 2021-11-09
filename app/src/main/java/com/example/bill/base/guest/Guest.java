@@ -2,9 +2,11 @@ package com.example.bill.base.guest;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 @Entity(tableName = "guests")
 public class Guest {
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
 

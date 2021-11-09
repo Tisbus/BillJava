@@ -11,8 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import com.example.bill.R;
+import com.example.bill.base.bill.BillViewModel;
 import com.example.bill.base.guest.Guest;
 import com.example.bill.base.guest.GuestViewModel;
+import com.example.bill.base.lists.ListsAll;
+import com.example.bill.base.lists.ListsViewModel;
+import com.example.bill.base.total.TotalViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +28,30 @@ public class StartActivity extends AppCompatActivity {
     private EditText editTextName;
     private List<View> addEdit;
     private GuestViewModel model;
-
+    private BillViewModel viewModel;
+    private ListsViewModel viewListModel;
+    private TotalViewModel totalViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_activity);
         model = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(GuestViewModel.class);
+        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(BillViewModel.class);
+        viewListModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(ListsViewModel.class);
+        totalViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(TotalViewModel.class);
+
+        /*Delete all history*/
+        /*viewListModel.deleteAll();*/
+
+        /*Delete All Guest*/
+        /*model.deleteAll();*/
+
+        /*Delete All Total*/
+       /* totalViewModel.deleteAll();*/
+
+/*        Delete this bill*/
+        /*viewModel.deleteAll();*/
+
         buttonAdd = findViewById(R.id.buttonAdd);
         addEdit = new ArrayList<>();
         final LinearLayout liner = (LinearLayout) findViewById(R.id.liner);

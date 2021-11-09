@@ -13,20 +13,21 @@ import com.example.bill.R;
 import com.example.bill.base.total.Total;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TotalAdapter extends RecyclerView.Adapter<TotalAdapter.TotalViewHolder> {
 
-    private ArrayList<Total> totals;
+    private List<Total> totals;
 
     public TotalAdapter() {
         this.totals = new ArrayList();
     }
 
-    public ArrayList<Total> getTotals() {
+    public List<Total> getTotals() {
         return totals;
     }
 
-    public void setTotals(ArrayList<Total> totals) {
+    public void setTotals(List<Total> totals) {
         this.totals = totals;
         notifyDataSetChanged();
     }

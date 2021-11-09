@@ -2,6 +2,8 @@ package com.example.bill.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,16 +24,19 @@ import com.example.bill.base.bill.BillViewModel;
 import com.example.bill.base.lists.ListsAll;
 import com.example.bill.base.lists.ListsViewModel;
 import com.example.bill.base.total.Total;
+import com.example.bill.base.total.TotalViewModel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class SummaryActivity extends AppCompatActivity {
 
     private BillViewModel viewModel;
     private ListsViewModel viewListModel;
+    private TotalViewModel totalViewModel;
     private TotalAdapter adapter;
     private RecyclerView recyclerView;
     private TextView textViewSum;
@@ -43,7 +48,7 @@ public class SummaryActivity extends AppCompatActivity {
     private Button buttonAddTip;
     private EditText editTextTipQty;
     private EditText editTextNameBill;
-    private ArrayList<Total> totals;
+    private List<Total> totals;
     int sum = 0;
 
     @Override
@@ -62,9 +67,11 @@ public class SummaryActivity extends AppCompatActivity {
         editTextNameBill = findViewById(R.id.editTextNameBill);
         viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(BillViewModel.class);
         viewListModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(ListsViewModel.class);
+        totalViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(TotalViewModel.class);
         adapter = new TotalAdapter();
         recyclerView = findViewById(R.id.recyclerViewTotal);
         getData();
+        getTotal();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         checkBoxTip = findViewById(R.id.checkBoxTip);
@@ -100,7 +107,6 @@ public class SummaryActivity extends AppCompatActivity {
     }
 
     public void getData(){
-        totals = new ArrayList<>();
 
         String tmpName = "";
         String name = "";
@@ -117,14 +123,14 @@ public class SummaryActivity extends AppCompatActivity {
                 }else if(i == viewModel.getBillList().size()-1){
                     sum += viewModel.getBillList().get(i).getPrice();
                     summary += viewModel.getBillList().get(i).getPrice();
-                    totals.add(new Total(tmpName, sum));
+                    totalViewModel.insert(new Total(tmpName, sum));
                 }else{
                     if (viewModel.getBillList().get(i).getName().equals(name)) {
                         sum += viewModel.getBillList().get(i).getPrice();
                         summary += viewModel.getBillList().get(i).getPrice();
                         tmpName = name;
                     } else {
-                        totals.add(new Total(tmpName, sum));
+                        totalViewModel.insert(new Total(tmpName, sum));
                         sum = 0;
                         tmpName = "";
                         sum += viewModel.getBillList().get(i).getPrice();
@@ -135,8 +141,17 @@ public class SummaryActivity extends AppCompatActivity {
                 }
             }
         }
-        adapter.setTotals(totals);
         textViewSum.setText(String.valueOf(summary));
+    }
+
+    public void getTotal(){
+        LiveData<List<Total>> total = totalViewModel.getTotals();
+        total.observe(this, new Observer<List<Total>>() {
+            @Override
+            public void onChanged(List<Total> totals) {
+                adapter.setTotals(totals);
+            }
+        });
     }
 
 
@@ -149,12 +164,7 @@ public class SummaryActivity extends AppCompatActivity {
         }else{
             sum = Integer.parseInt(String.valueOf(textViewSumWithTip.getText()));
         }
-        /*Delete all history*/
-        /*viewListModel.deleteAll();*/
         viewListModel.insert(new ListsAll(nameDate, name, viewModel.getBillList(), totals, sum));
-        /*Delete this bill and total sum array*/
-/*        viewModel.deleteAll();
-        totals.clear();*/
         Intent intent = new Intent(this, ListBillActivity.class);
         startActivity(intent);
     }
