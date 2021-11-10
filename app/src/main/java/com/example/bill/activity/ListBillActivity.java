@@ -2,16 +2,22 @@ package com.example.bill.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bill.R;
 import com.example.bill.adapter.lists.BillListAdapter;
+import com.example.bill.base.lists.ListsAll;
 import com.example.bill.base.lists.ListsViewModel;
+
+import java.util.List;
 
 public class ListBillActivity extends AppCompatActivity {
 
@@ -40,7 +46,13 @@ public class ListBillActivity extends AppCompatActivity {
     }
 
     public void getData() {
-        adapter.setListsAll(viewModel.getListsList());
+        LiveData<List<ListsAll>> listGetAll = viewModel.getLists();
+        listGetAll.observe(this, new Observer<List<ListsAll>>() {
+            @Override
+            public void onChanged(List<ListsAll> listsAlls) {
+                adapter.setListsAll(listsAlls);
+            }
+        });
     }
 
     public void getDetail(int position) {

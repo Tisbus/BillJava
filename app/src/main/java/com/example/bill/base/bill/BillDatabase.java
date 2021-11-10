@@ -5,7 +5,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import android.content.Context;
 
-@Database(entities = {Bill.class}, version = 3, exportSchema = false)
+@Database(entities = {Bill.class}, version = 4, exportSchema = false)
 public abstract class BillDatabase extends RoomDatabase {
     private static final String DB_NAME = "bill";
     private static final Object LOCK = new Object();

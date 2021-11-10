@@ -16,6 +16,7 @@ import com.example.bill.R;
 import com.example.bill.base.bill.Bill;
 import com.example.bill.adapter.bill.BillAdapter;
 import com.example.bill.base.bill.BillViewModel;
+import com.example.bill.base.total.TotalViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -26,13 +27,14 @@ public class MainActivity extends AppCompatActivity {
     private BillAdapter adapter;
     private RecyclerView recyclerView;
     private BillViewModel viewModel;
+    private TotalViewModel totalViewModel;
     private FloatingActionButton floatAddTotal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(BillViewModel.class);
-/*        viewModel.deleteAll();*/
+        totalViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(TotalViewModel.class);
         recyclerView = findViewById(R.id.recyclerViewBill);
         adapter = new BillAdapter();
         getData();
@@ -62,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onclickTotalSummary(View view) {
+        /*delete total pered summary*/
+        totalViewModel.deleteAll();
         Intent intentGo = new Intent(this, SummaryActivity.class);
         startActivity(intentGo);
     }

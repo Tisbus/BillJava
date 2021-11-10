@@ -41,16 +41,16 @@ public class StartActivity extends AppCompatActivity {
         totalViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(TotalViewModel.class);
 
         /*Delete all history*/
-        /*viewListModel.deleteAll();*/
+        viewListModel.deleteAll();
 
         /*Delete All Guest*/
-        /*model.deleteAll();*/
+        model.deleteAll();
 
         /*Delete All Total*/
-       /* totalViewModel.deleteAll();*/
+        totalViewModel.deleteAll();
 
 /*        Delete this bill*/
-        /*viewModel.deleteAll();*/
+        viewModel.deleteAll();
 
         buttonAdd = findViewById(R.id.buttonAdd);
         addEdit = new ArrayList<>();

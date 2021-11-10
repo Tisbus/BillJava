@@ -159,7 +159,7 @@ public class SummaryActivity extends AppCompatActivity {
         String nameDate = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(new Date());
         String name = String.valueOf(editTextNameBill.getText());
         int sum = 0;
-        if(Integer.parseInt(textViewSumWithTip.getText().toString()) == 0){
+        if(Integer.parseInt(String.valueOf(textViewSumWithTip.getText())) == 0){
             sum = Integer.parseInt(String.valueOf(textViewSum.getText()));
         }else{
             sum = Integer.parseInt(String.valueOf(textViewSumWithTip.getText()));
